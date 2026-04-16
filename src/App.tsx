@@ -225,6 +225,46 @@ export default function App() {
         </div>
       </section>
 
+      {/* Portfolio Section */}
+      <section id="portfolio" className="py-32 px-10 bg-slate-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-baseline gap-6 mb-24 justify-end">
+            <div className="font-mono text-[10px] text-silver uppercase">[CLIENT_ECOSYSTEM]</div>
+            <div className="h-px flex-1 bg-silver/30" />
+            <h2 className="text-7xl font-black text-navy tracking-tight uppercase">Portfolio</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { name: "Midagri", tag: "Agricultural Governance", seed: "farm" },
+              { name: "Mancorb", tag: "Corporate Logistics", seed: "office" },
+              { name: "Mannesi", tag: "Financial Systems", seed: "bank" },
+              { name: "Networkservices", tag: "Global Connectivity", seed: "server" }
+            ].map((client) => (
+              <motion.div
+                key={client.name}
+                whileHover={{ y: -5 }}
+                className="bg-white border border-silver/20 overflow-hidden group"
+              >
+                <div className="h-64 overflow-hidden relative">
+                  <img 
+                    src={`https://picsum.photos/seed/${client.seed}/800/600`} 
+                    alt={client.name} 
+                    className="w-full h-full object-cover grayscale brightness-90 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-700"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-navy/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <div className="p-8">
+                  <div className="font-mono text-[9px] text-electric-blue uppercase tracking-widest mb-2">{client.tag}</div>
+                  <h3 className="text-2xl font-black text-navy uppercase">{client.name}</h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Innovation Section */}
       <section id="innovation" className="py-32 px-10">
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
@@ -244,6 +284,67 @@ export default function App() {
               <div key={item.title} className="flex flex-col items-center">
                 <div className="text-5xl font-black text-navy mb-2">{item.val}<span className="text-lg ml-1 text-silver">{item.unit}</span></div>
                 <div className="font-mono text-[10px] uppercase tracking-widest text-electric-blue font-bold">{item.title}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Plans Section */}
+      <section id="plans" className="py-32 px-10 bg-white border-t border-silver/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-baseline gap-6 mb-24">
+            <h2 className="text-7xl font-black text-navy tracking-tight uppercase">Plans</h2>
+            <div className="h-px flex-1 bg-silver/30" />
+            <div className="font-mono text-[10px] text-silver uppercase">[PRICING_STRUCTURES]</div>
+          </div>
+
+          <div className="grid md:grid-cols-3 border-l border-t border-silver/20">
+            {[
+              {
+                title: "Corporate Pro",
+                target: "SMEs and Startups",
+                price: "From S/. 2,500",
+                features: ["Self-managed website", "Basic SEO included", "Domain and Hosting for 1 year", "Responsive design", "30 days of support"],
+                popular: false
+              },
+              {
+                title: "E-commerce Pro",
+                target: "Retail stores",
+                price: "From S/. 3,500",
+                features: ["Product catalog", "Payment gateway (Izipay/Niubiz)", "Sales training", "Logistics integration", "60 days of support"],
+                popular: true
+              },
+              {
+                title: "Custom System",
+                target: "Complex operations",
+                price: "Quote",
+                features: ["Custom Dashboard", "React + Node.js", "MySQL database", "Custom API", "Ongoing support"],
+                popular: false
+              }
+            ].map((plan) => (
+              <div key={plan.title} className={`relative border-r border-b border-silver/20 p-12 transition-all ${plan.popular ? 'bg-navy text-white shadow-2xl z-10 scale-[1.02]' : 'hover:bg-slate-50'}`}>
+                {plan.popular && (
+                  <div className="absolute top-0 right-12 transform -translate-y-1/2 bg-electric-blue text-white font-mono text-[10px] font-bold px-4 py-1 uppercase tracking-widest">
+                    Popular
+                  </div>
+                )}
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-electric-blue font-bold mb-4">{plan.target}</div>
+                <h3 className={`text-3xl font-black uppercase mb-2 ${plan.popular ? 'text-white' : 'text-navy'}`}>{plan.title}</h3>
+                <div className={`text-4xl font-black mb-10 ${plan.popular ? 'text-electric-blue' : 'text-navy'}`}>{plan.price}</div>
+                
+                <ul className="space-y-4 mb-12">
+                  {plan.features.map(f => (
+                    <li key={f} className="flex items-center gap-3 text-sm font-medium">
+                      <div className={`w-1.5 h-1.5 rounded-full ${plan.popular ? 'bg-electric-blue' : 'bg-silver'}`} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <button className={`w-full py-4 font-bold uppercase tracking-widest text-[12px] transition-all border-2 ${plan.popular ? 'bg-white text-navy hover:bg-electric-blue hover:text-white border-white' : 'bg-navy text-white hover:bg-electric-blue border-navy hover:border-electric-blue'}`}>
+                  Get Started
+                </button>
               </div>
             ))}
           </div>
